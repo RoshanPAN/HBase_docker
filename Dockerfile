@@ -89,9 +89,9 @@ RUN chmod 700 /etc/bootstrap.sh
 ENV BOOTSTRAP /etc/bootstrap.sh
 ###
 # workingaround docker.io build error
-RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
-RUN chmod +x /usr/local/hadoop/etc/hadoop/*-env.sh
-RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
+# RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
+# RUN chmod +x /usr/local/hadoop/etc/hadoop/*-env.sh
+# RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
 
 # Create this folder if not exists
 RUN mkdir -p $HADOOP_PREFIX/tmp/name
