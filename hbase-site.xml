@@ -1,0 +1,10 @@
+<configuration>
+  <property>
+    <name>hbase.rootdir</name>
+    <value>file:///usr/local/hbase/tmp/hbase_data</value>
+  </property>
+  <property>
+    <name>hbase.zookeeper.property.dataDir</name>
+    <value>/usr/local/hbase/tmp/zookeeper_data</value>
+  </property>
+</configuration>

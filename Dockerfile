@@ -44,9 +44,9 @@ RUN rm /usr/bin/java && ln -s $JAVA_HOME/bin/java /usr/bin/java
 
 ### TODO Download HBase & Configure EVN variables
 RUN curl -s http://apache.claz.org/hbase/stable/hbase-1.2.6-bin.tar.gz | tar -xz -C /usr/local/
-# RUN cd /usr/local && ln -s ./hadoop-2.7.4 hadoop
-# 
-# ENV HADOOP_PREFIX /usr/local/hadoop
+RUN cd /usr/local && ln -s ./hbase-1.2.6 hbase
+
+ENV HBASE_PREFIX /usr/local/hbase
 # ENV HADOOP_COMMON_HOME /usr/local/hadoop
 # ENV HADOOP_HDFS_HOME /usr/local/hadoop
 # ENV HADOOP_MAPRED_HOME /usr/local/hadoop
@@ -62,7 +62,7 @@ RUN curl -s http://apache.claz.org/hbase/stable/hbase-1.2.6-bin.tar.gz | tar -xz
 # RUN cp $HADOOP_PREFIX/etc/hadoop/*.xml $HADOOP_PREFIX/input
 
 # TODO Add cinfiguration file for HBase to distributed on a 3 machine cluster
-# ADD core-site.xml.template $HADOOP_PREFIX/etc/hadoop/core-site.xml
+ADD hbase-site.xml  $HBASE_PREFIX/conf/hbase-site.xml
 # ADD hdfs-site.xml $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml
 # ADD slaves $HADOOP_PREFIX/etc/hadoop/slaves
 # 
@@ -93,8 +93,9 @@ ENV BOOTSTRAP /etc/bootstrap.sh
 # RUN chmod +x /usr/local/hadoop/etc/hadoop/*-env.sh
 # RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
 
-# Create this folder if not exists
-RUN mkdir -p $HADOOP_PREFIX/tmp/name
+# Create folder for data if not exists
+RUN mkdir -p $HBASE_PREFIX/tmp/hbase_data
+RUN mkdir -p $HBASE_PREFIX/tmp/zookeeper_data
 
 ### Add SSH Configuration
 ADD ssh_config /root/.ssh/config 
@@ -109,8 +110,6 @@ RUN echo "Port 21222" >> /etc/ssh/sshd_config
 
 
 RUN service sshd start 
-# RUN $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh && $HADOOP_PREFIX/sbin/start-dfs.sh && $HADOOP_PREFIX/bin/hdfs dfs -mkdir -p /user/root
-# RUN service sshd start && $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh && $HADOOP_PREFIX/sbin/start-dfs.sh && $HADOOP_PREFIX/bin/hdfs dfs -put $HADOOP_PREFIX/etc/hadoop/ input
 
 ###
 # modify the /etc/hosts file for ip hostname mapping

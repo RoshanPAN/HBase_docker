@@ -8,7 +8,7 @@ echo "164.107.119.21      machine02" >> /etc/hosts
 echo "164.107.119.22      machine03" >> /etc/hosts
 
 # TODO 
-# $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
+$HBASE_PREFIX/conf/hbase-env.sh
 
 rm /tmp/*.pid
 
