@@ -11,4 +11,12 @@
     <name>hbase.cluster.distributed</name>
     <value>true</value>
   </property>
+  <property>
+    <name>hbase.zookeeper.quorum</name>
+    <value>machine03, machine02, machine01</value>
+  </property>
+  <property>
+    <name>hbase.zookeeper.property.dataDir</name>
+    <value>/usr/local/zookeeper</value>
+  </property>
 </configuration>

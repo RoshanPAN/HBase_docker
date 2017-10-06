@@ -64,6 +64,7 @@ RUN sed -i '/^# export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/java/default\n:' $H
 
 # TODO Add cinfiguration file for HBase to distributed on a 3 machine cluster
 ADD hbase-site.xml  $HBASE_PREFIX/conf/hbase-site.xml
+ADD regionservers  $HBASE_PREFIX/conf/regionservers
 # ADD hdfs-site.xml $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml
 # ADD slaves $HADOOP_PREFIX/etc/hadoop/slaves
 # 
@@ -126,12 +127,26 @@ RUN service sshd start
 # Ref: https://ambari.apache.org/1.2.3/installing-hadoop-using-ambari/content/reference_chap2_4.html
 # HMaster, hbase.master.port
 EXPOSE 60000
+EXPOSE 16010
+EXPOSE 16020
+EXPOSE 16030
+# Port for Master Backup, so, here we support maximum 3 backup HMaster
+EXPOSE 16012
+EXPOSE 16022
+EXPOSE 16032
+EXPOSE 16014
+EXPOSE 16024
+EXPOSE 16034
+
 # HMaster Info Web UI (http), hbase.master.info.port
 EXPOSE 60010
+EXPOSE 16020
 # Region Server, hbase.regionserver.port
 EXPOSE 60020
+EXPOSE 16200
 # Region Server Web UI(http), hbase.regionserver.info.port
 EXPOSE 60030
+EXPOSE 16300
 
 # Zookeeper
 # hbase.zookeeper.peerport
