@@ -6,6 +6,15 @@
 echo "164.107.119.20      machine01" >> /etc/hosts
 echo "164.107.119.21      machine02" >> /etc/hosts
 echo "164.107.119.22      machine03" >> /etc/hosts
+echo "164.107.119.20      machine01" >> /etc/hosts
+echo "164.107.119.21      machine02" >> /etc/hosts
+echo "164.107.119.22      machine03" >> /etc/hosts
+
+# Change the IP of loopback
+cp /etc/hosts ~/hosts.new
+sed -i 's/127.0.1.1/127.0.0.1/' ~/hosts.new
+cp -f ~/hosts.new /etc/hosts
+rm ~/hosts.new
 
 $HBASE_PREFIX/conf/hbase-env.sh
 

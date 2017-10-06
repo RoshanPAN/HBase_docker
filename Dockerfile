@@ -45,10 +45,15 @@ RUN rm /usr/bin/java && ln -s $JAVA_HOME/bin/java /usr/bin/java
 ### TODO Download HBase & Configure EVN variables
 RUN curl -s http://apache.claz.org/hbase/stable/hbase-1.2.6-bin.tar.gz | tar -xz -C /usr/local/
 RUN cd /usr/local && ln -s ./hbase-1.2.6 hbase
+ENV HBASE_HOME /usr/local/hbase  
+ENV PATH ${HBASE_HOME}/bin:$PATH
 
 ENV HBASE_PREFIX /usr/local/hbase
 # Configure the JAVA_HOME for HBase again
 RUN sed -i '/^# export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/java/default\n:' $HBASE_PREFIX/conf/hbase-env.sh
+# RUN sed -i 's/# export HBASE_MANAGES_ZK=true/export HBASE_MANAGES_ZK=false/' $HBASE_PREFIX/conf/hbase-env.sh
+RUN sed -i 's/# export HBASE_MANAGES_ZK=true/export HBASE_MANAGES_ZK=true/' $HBASE_PREFIX/conf/hbase-env.sh
+# RUN sed -i 's/export HBASE_MANAGES_ZK=false/export HBASE_MANAGES_ZK=true/' $HBASE_PREFIX/conf/hbase-env.sh
 # ENV HADOOP_COMMON_HOME /usr/local/hadoop
 # ENV HADOOP_HDFS_HOME /usr/local/hadoop
 # ENV HADOOP_MAPRED_HOME /usr/local/hadoop
@@ -115,13 +120,11 @@ RUN service sshd start
 
 ###
 # modify the /etc/hosts file for ip hostname mapping
-# echo "164.107.119.20      machine01" >> /etc/hosts
-# echo "164.107.119.21      machine02" >> /etc/hosts
-# echo "164.107.119.22      machine03" >> /etc/hosts
 # RUN echo "164.107.119.20      machine01" >> /etc/hosts
 # RUN echo "164.107.119.21      machine02" >> /etc/hosts
 # RUN echo "164.107.119.22      machine03" >> /etc/hosts
 
+WORKDIR /usr/local/hbase
 
 # HDFS Default Ports
 # Ref: https://ambari.apache.org/1.2.3/installing-hadoop-using-ambari/content/reference_chap2_4.html
