@@ -7,4 +7,8 @@
     <name>hbase.zookeeper.property.dataDir</name>
     <value>hdfs://machine01:8020/zookeeper</value>
   </property>
+  <property>
+    <name>hbase.cluster.distributed</name>
+    <value>true</value>
+  </property>
 </configuration>

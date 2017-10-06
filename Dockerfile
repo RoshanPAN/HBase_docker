@@ -47,6 +47,8 @@ RUN curl -s http://apache.claz.org/hbase/stable/hbase-1.2.6-bin.tar.gz | tar -xz
 RUN cd /usr/local && ln -s ./hbase-1.2.6 hbase
 
 ENV HBASE_PREFIX /usr/local/hbase
+# Configure the JAVA_HOME for HBase again
+RUN sed -i '/^# export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/java/default\n:' $HBASE_PREFIX/conf/hbase-env.sh
 # ENV HADOOP_COMMON_HOME /usr/local/hadoop
 # ENV HADOOP_HDFS_HOME /usr/local/hadoop
 # ENV HADOOP_MAPRED_HOME /usr/local/hadoop
@@ -54,7 +56,6 @@ ENV HBASE_PREFIX /usr/local/hbase
 # ENV HADOOP_CONF_DIR /usr/local/hadoop/etc/hadoop
 # ENV YARN_CONF_DIR $HADOOP_PREFIX/etc/hadoop
 # 
-# RUN sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/java/default\nexport HADOOP_PREFIX=/usr/local/hadoop\nexport HADOOP_HOME=/usr/local/hadoop\n:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
 # RUN sed -i '/^export HADOOP_CONF_DIR/ s:.*:export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop/:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
 # RUN . $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
 
