@@ -15,4 +15,8 @@
     <name>hbase.zookeeper.property.dataDir</name>
     <value>/usr/local/zookeeper</value>
   </property>
+  <property>
+      <name>hbase.zookeeper.property.clientPort</name>
+      <value>2181</value>
+   </property>
 </configuration>
