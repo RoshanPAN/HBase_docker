@@ -118,12 +118,6 @@ RUN echo "Port 21222" >> /etc/ssh/sshd_config
 
 RUN service sshd start 
 
-###
-# modify the /etc/hosts file for ip hostname mapping
-# RUN echo "164.107.119.20      machine01" >> /etc/hosts
-# RUN echo "164.107.119.21      machine02" >> /etc/hosts
-# RUN echo "164.107.119.22      machine03" >> /etc/hosts
-
 WORKDIR /usr/local/hbase
 
 # HDFS Default Ports

@@ -6,9 +6,11 @@
 echo "164.107.119.20      machine01" >> /etc/hosts
 echo "164.107.119.21      machine02" >> /etc/hosts
 echo "164.107.119.22      machine03" >> /etc/hosts
-echo "164.107.119.20      machine01" >> /etc/hosts
-echo "164.107.119.21      machine02" >> /etc/hosts
-echo "164.107.119.22      machine03" >> /etc/hosts
+echo "164.107.119.20      CSE-Hcse101389D" >> /etc/hosts
+echo "164.107.119.21      CSE-Hcse101384D" >> /etc/hosts
+echo "164.107.119.22      CSE-Hcse101423D" >> /etc/hosts
+
+
 
 # Change the IP of loopback
 cp /etc/hosts ~/hosts.new
