@@ -9,7 +9,7 @@
   </property>
   <property>
     <name>hbase.zookeeper.quorum</name>
-    <value>machine01, machine03, machine02</value>
+    <value>machine03</value>
   </property>
   <property>
     <name>hbase.zookeeper.property.dataDir</name>
