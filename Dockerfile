@@ -115,6 +115,7 @@ RUN sed  -i "/^[^#]*UsePAM/ s/.*/#&/"  /etc/ssh/sshd_config
 RUN echo "UsePAM no" >> /etc/ssh/sshd_config
 RUN echo "Port 21222" >> /etc/ssh/sshd_config
 
+RUN chmod +x $HBASE_PREFIX/conf/hbase-env.sh
 
 RUN service sshd start 
 
