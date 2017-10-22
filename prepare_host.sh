@@ -39,5 +39,5 @@ cp ~/.ssh/id_rsa . && \
   echo ">>> ssh keys copied to the building context"
 
 
-# Build Docker Image && Create Contrainer from Image
-docker build -t="pls331/centos:hbase-1.2.6-psuedo_distributed"
+# Build Docker Image
+docker build -t="pls331/centos:hbase-1.2.6-psuedo_distributed" .
