@@ -25,6 +25,8 @@ service sshd start
 # Start HBase
 # $HBASE_PREFIX/bin/start-hbase.sh
 
+$HBASE_PREFIX/bin/start-hbase.sh
+
 # Keep container Running while run in background
 if [[ $1 == "-d" ]]; then
   while true; do sleep 1000; done
