@@ -3,7 +3,7 @@
 source /etc/profile.d/maven.sh
 
 : ${HBASE_PREFIX:=/usr/local/hbase}
-: ${HBASE_PREFIX:=/usr/local/YCSB}
+: ${YCSB_PREFIX:=/usr/local/YCSB}
 
 # Add IP-Host mapping into /etc/Hosts
 echo "164.107.119.20      machine01" >> /etc/hosts
@@ -30,7 +30,8 @@ service sshd start
 
 $HBASE_PREFIX/bin/start-hbase.sh
 
-# maven
+# YCSB
+cd $YCSB_PREFIX
 # 1. Load data
 # bin/ycsb load hbase -P workloads/workloada -cp $HBASE_PREFIX/conf -p table=usertable -p columnfamily=family
 # 2. Run wordload
