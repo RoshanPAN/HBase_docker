@@ -12,7 +12,7 @@ USER root
 # install dev tools
 RUN yum clean all; \
     rpm --rebuilddb; \
-    yum install -y curl which tar sudo openssh-server openssh-clients rsync nc wget
+    yum install -y curl which tar sudo openssh-server openssh-clients rsync nc wget git
 # update libselinux. see https://github.com/sequenceiq/hadoop-docker/issues/14
 RUN yum update -y libselinux
 
@@ -64,23 +64,6 @@ RUN sed -i '/^# export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/java/default\n:' $H
 
 # TODO Add cinfiguration file for HBase to distributed on a 3 machine cluster
 ADD hbase-site.xml  $HBASE_PREFIX/conf/hbase-site.xml
-# ADD hdfs-site.xml $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml
-# ADD slaves $HADOOP_PREFIX/etc/hadoop/slaves
-# 
-# ADD mapred-site.xml $HADOOP_PREFIX/etc/hadoop/mapred-site.xml
-# ADD yarn-site.xml $HADOOP_PREFIX/etc/hadoop/yarn-site.xml
-# 
-# ADD my-start-cluster-from-master.sh $HADOOP_PREFIX/
-# RUN chmod 700 $HADOOP_PREFIX/my-start-cluster-from-master.sh
-
-
-# # installing supervisord
-# RUN yum install -y python-setuptools
-# RUN easy_install pip
-# RUN curl https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py -o - | python
-# RUN pip install supervisor
-#
-# ADD supervisord.conf /etc/supervisord.conf
 
 #### TODO Add bootstrap script to change something when container starts
 ADD bootstrap.sh /etc/bootstrap.sh
@@ -102,6 +85,23 @@ RUN mkdir -p $HBASE_PREFIX/tmp/zookeeper_data
 ADD ssh_config /root/.ssh/config 
 RUN chmod 600 /root/.ssh/config 
 RUN chown root:root /root/.ssh/config 
+
+
+# Maven
+# maven.sh script is loaded during bootstrap
+RUN cd /opt/
+RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
+RUN sudo tar xzf apache-maven-3.5.0-bin.tar.gz
+RUN ln -s apache-maven-3.5.0  maven
+ADD maven.sh /etc/profile.d/maven.sh
+RUN rm -f /opt/apache-maven-3.5.0-bin.tar.gz
+
+# YCSB from github repo
+RUN cd /usr/local
+RUN git clone https://github.com/brianfrankcooper/YCSB.git
+ENV YCSB_PREFIX /usr/local/YCSB
+RUN cd $YCSB_PREFIX
+RUN mvn clean package
 
 ###
 # fix the 254 error code
