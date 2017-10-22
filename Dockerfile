@@ -97,11 +97,8 @@ ADD maven.sh /etc/profile.d/maven.sh
 RUN rm -f /opt/apache-maven-3.5.0-bin.tar.gz
 
 # YCSB from github repo
-RUN cd /usr/local
-RUN git clone https://github.com/brianfrankcooper/YCSB.git
+RUN git clone https://github.com/brianfrankcooper/YCSB.git /usr/local/YCSB
 ENV YCSB_PREFIX /usr/local/YCSB
-RUN cd $YCSB_PREFIX
-RUN mvn clean package
 
 ###
 # fix the 254 error code

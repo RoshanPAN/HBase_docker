@@ -32,6 +32,8 @@ $HBASE_PREFIX/bin/start-hbase.sh
 
 # YCSB
 cd $YCSB_PREFIX
+# 0. prepare
+mvn clean package
 # 1. Load data
 # bin/ycsb load hbase -P workloads/workloada -cp $HBASE_PREFIX/conf -p table=usertable -p columnfamily=family
 # 2. Run wordload
