@@ -13,6 +13,7 @@ sed -i 's/127.0.1.1/127.0.0.1/' ~/hosts.new
 cp -f ~/hosts.new /etc/hosts
 rm ~/hosts.new
 
+chmod +x $HBASE_PREFIX/conf/hbase-env.sh
 $HBASE_PREFIX/conf/hbase-env.sh
 
 rm /tmp/*.pid
