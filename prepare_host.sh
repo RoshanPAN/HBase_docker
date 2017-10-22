@@ -54,4 +54,4 @@ else
 fi
 
 # Build Docker Image
-docker build -t="pls331/centos:hbase-1.2.6-standalone_hdfs" .
+docker build -t="pls331/centos:hbase-1.2.6-standalone_hdfs_YCSB" .
