@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source /etc/profile.d/maven.sh
-
 : ${HBASE_PREFIX:=/usr/local/hbase}
 : ${YCSB_PREFIX:=/usr/local/YCSB}
 
@@ -32,8 +30,6 @@ $HBASE_PREFIX/bin/start-hbase.sh
 
 # YCSB
 cd $YCSB_PREFIX
-# 0. prepare
-mvn clean package
 # 1. Load data
 # bin/ycsb load hbase -P workloads/workloada -cp $HBASE_PREFIX/conf -p table=usertable -p columnfamily=family
 # 2. Run wordload

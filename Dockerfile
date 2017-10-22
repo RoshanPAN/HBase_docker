@@ -99,6 +99,7 @@ ENV PATH $M2:$PATH
 # YCSB from github repo
 RUN git clone https://github.com/brianfrankcooper/YCSB.git /usr/local/YCSB
 ENV YCSB_PREFIX /usr/local/YCSB
+RUN cd $YCSB_PREFIX && mvn clean package
 
 ###
 # fix the 254 error code
