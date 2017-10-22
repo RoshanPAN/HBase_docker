@@ -38,6 +38,20 @@ cp ~/.ssh/id_rsa . && \
   cp ~/.ssh/known_hosts . && \
   echo ">>> ssh keys copied to the building context"
 
+# change hbase.rootdir for each machine (hbase-site.xml) 
+if [ "$HOST" = "CSE-Hcse101389D" ]; then
+  sed -i 's/<value>hdfs:\/\/machine01:8020\/hbase<\/value>/<value>hdfs:\/\/machine01:8020\/hbase_machine01<\/value>/' ./hbase-site.xml
+else
+  if [ "$HOST" = "CSE-Hcse101384D" ]; then
+    sed -i 's/<value>hdfs:\/\/machine01:8020\/hbase<\/value>/<value>hdfs:\/\/machine01:8020\/hbase_machine02<\/value>/' ./hbase-site.xml
+  else
+    if [ "$HOST" = "CSE-Hcse101423D" ]; then
+      sed -i 's/<value>hdfs:\/\/machine01:8020\/hbase<\/value>/<value>hdfs:\/\/machine01:8020\/hbase_machine03<\/value>/' ./hbase-site.xml
+    else
+      echo "Machine Not Identified. Change the hbase folder manually."
+    fi
+  fi
+fi
 
 # Build Docker Image
 docker build -t="pls331/centos:hbase-1.2.6-psuedo_distributed" .
