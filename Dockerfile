@@ -89,12 +89,12 @@ RUN chown root:root /root/.ssh/config
 
 # Maven
 # maven.sh script is loaded during bootstrap
-RUN cd /opt/
-RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
-RUN sudo tar xzf apache-maven-3.5.0-bin.tar.gz
-RUN ln -s apache-maven-3.5.0  maven
-ADD maven.sh /etc/profile.d/maven.sh
-RUN rm -f /opt/apache-maven-3.5.0-bin.tar.gz
+RUN curl -s http://www-eu.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz | tar -xz -C /usr/local/
+RUN cd /usr/local && ln -s apache-maven-3.5.0  maven
+# ADD maven.sh /etc/profile.d/maven.sh
+ENV M2_HOME /usr/local/maven
+ENV M2 $M2_HOME/bin
+ENV PATH $M2:$PATH
 
 # YCSB from github repo
 RUN git clone https://github.com/brianfrankcooper/YCSB.git /usr/local/YCSB
