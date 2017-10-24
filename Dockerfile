@@ -34,8 +34,8 @@ ADD known_hosts   /root/.ssh/known_hosts
 ###
 # java 1.8
 RUN curl -LO 'http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm' -H 'Cookie: oraclelicense=accept-securebackup-cookie'
-RUN rpm -i jdk-8u144-linux-x64.rpm
-RUN rm jdk-8u144-linux-x64.rpm
+RUN rpm -i jdk-8u151-linux-x64.rpm
+RUN rm jdk-8u151-linux-x64.rpm
 
 ENV JAVA_HOME /usr/java/default
 ENV PATH $PATH:$JAVA_HOME/bin
