@@ -49,33 +49,9 @@ RUN cd /usr/local && ln -s ./hbase-1.2.6 hbase
 ENV HBASE_PREFIX /usr/local/hbase
 # Configure the JAVA_HOME for HBase again
 RUN sed -i '/^# export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/java/default\n:' $HBASE_PREFIX/conf/hbase-env.sh
-# ENV HADOOP_COMMON_HOME /usr/local/hadoop
-# ENV HADOOP_HDFS_HOME /usr/local/hadoop
-# ENV HADOOP_MAPRED_HOME /usr/local/hadoop
-# ENV HADOOP_YARN_HOME /usr/local/hadoop
-# ENV HADOOP_CONF_DIR /usr/local/hadoop/etc/hadoop
-# ENV YARN_CONF_DIR $HADOOP_PREFIX/etc/hadoop
-# 
-# RUN sed -i '/^export HADOOP_CONF_DIR/ s:.*:export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop/:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
-# RUN . $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
-
-# RUN mkdir $HADOOP_PREFIX/input
-# RUN cp $HADOOP_PREFIX/etc/hadoop/*.xml $HADOOP_PREFIX/input
 
 # TODO Add cinfiguration file for HBase to distributed on a 3 machine cluster
 ADD hbase-site.xml  $HBASE_PREFIX/conf/hbase-site.xml
-
-#### TODO Add bootstrap script to change something when container starts
-ADD bootstrap.sh /etc/bootstrap.sh
-RUN chown root:root /etc/bootstrap.sh
-RUN chmod 700 /etc/bootstrap.sh
-#### TODO Add it back 
-ENV BOOTSTRAP /etc/bootstrap.sh
-###
-# workingaround docker.io build error
-# RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
-# RUN chmod +x /usr/local/hadoop/etc/hadoop/*-env.sh
-# RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
 
 # Create folder for data if not exists
 RUN mkdir -p $HBASE_PREFIX/tmp/hbase_data
@@ -102,6 +78,13 @@ ENV YCSB_PREFIX /usr/local/YCSB
 RUN cd $YCSB_PREFIX && mvn clean package
 ADD workloadmy $YCSB_PREFIX/workloads/workloadmy
 ADD run_YCSB.sh $YCSB_PREFIX/run_YCSB.sh
+
+#### TODO Add bootstrap script to change something when container starts
+ADD bootstrap.sh /etc/bootstrap.sh
+RUN chown root:root /etc/bootstrap.sh
+RUN chmod 700 /etc/bootstrap.sh
+#### TODO Add it back 
+ENV BOOTSTRAP /etc/bootstrap.sh
 
 ###
 # fix the 254 error code
