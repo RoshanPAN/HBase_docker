@@ -33,8 +33,8 @@ sleep 7
 
 # YCSB
 cd $YCSB_PREFIX
-chmod +x $HBASE_PREFIX/run_YCSB.sh
-$HBASE_PREFIX/run_YCSB.sh
+chmod +x $YCSB_PREFIX/run_YCSB.sh
+$YCSB_PREFIX/run_YCSB.sh
 
 # Keep container Running while run in background
 if [[ $1 == "-d" ]]; then
