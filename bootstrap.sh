@@ -29,7 +29,7 @@ service sshd start
 
 $HBASE_PREFIX/bin/start-hbase.sh
 
-sleep(7);
+sleep 7
 
 # YCSB
 cd $YCSB_PREFIX
