@@ -100,6 +100,8 @@ ENV PATH $M2:$PATH
 RUN git clone https://github.com/brianfrankcooper/YCSB.git /usr/local/YCSB
 ENV YCSB_PREFIX /usr/local/YCSB
 RUN cd $YCSB_PREFIX && mvn clean package
+ADD workloadmy $YCSB_PREFIX/workloads/workloadmy
+ADD run_YCSB.sh $YCSB_PREFIX/run_YCSB.sh
 
 ###
 # fix the 254 error code

@@ -26,14 +26,15 @@ service sshd start
 # Start HBase
 # $HBASE_PREFIX/bin/start-hbase.sh
 
+
 $HBASE_PREFIX/bin/start-hbase.sh
+
+sleep(7);
 
 # YCSB
 cd $YCSB_PREFIX
-# 1. Load data
-# bin/ycsb load hbase -P workloads/workloada -cp $HBASE_PREFIX/conf -p table=usertable -p columnfamily=family
-# 2. Run wordload
-# bin/ycsb run hbase -P workloads/workloada -cp $HBASE_PREFIX/conf -p table=usertable -p columnfamily=family
+chmod +x $HBASE_PREFIX/run_YCSB.sh
+$HBASE_PREFIX/run_YCSB.sh
 
 # Keep container Running while run in background
 if [[ $1 == "-d" ]]; then
