@@ -89,8 +89,8 @@ RUN chown root:root /root/.ssh/config
 
 # Maven
 # maven.sh script is loaded during bootstrap
-RUN curl -s http://www-eu.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz | tar -xz -C /usr/local/
-RUN cd /usr/local && ln -s apache-maven-3.5.0  maven
+RUN curl -s http://ftp.wayne.edu/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz | tar -xz -C /usr/local/
+RUN cd /usr/local && ln -s apache-maven-3.5.2  maven
 # ADD maven.sh /etc/profile.d/maven.sh
 ENV M2_HOME /usr/local/maven
 ENV M2 $M2_HOME/bin
