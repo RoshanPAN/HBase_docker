@@ -1,7 +1,11 @@
 <configuration>
   <property>
     <name>hbase.master.hostname</name>
-    <value>machine03</value>
+    <value>164.107.119.22</value>
+  </property>
+  <property>
+    <name>hbase.master.port</name>
+    <value>60000</value>
   </property>
   <property>
     <name>hbase.rootdir</name>
@@ -13,7 +17,7 @@
   </property>
   <property>
     <name>hbase.zookeeper.quorum</name>
-    <value>machine01,machine03,machine02</value>
+    <value>164.107.119.20,164.107.119.22,164.107.119.21</value>
   </property>
   <property>
     <name>hbase.zookeeper.property.dataDir</name>
