@@ -115,6 +115,8 @@ RUN sed  -i "/^[^#]*UsePAM/ s/.*/#&/"  /etc/ssh/sshd_config
 RUN echo "UsePAM no" >> /etc/ssh/sshd_config
 RUN echo "Port 21222" >> /etc/ssh/sshd_config
 
+ADD hadoop-common-2.5.1.jar $HBASE_PREFIX/lib/hadoop-common-2.5.1.jar.new
+
 
 RUN service sshd start 
 
