@@ -28,12 +28,15 @@ rm /tmp/*.pid
 service sshd start
 
 # Start HBase
-$HBASE_PREFIX/bin/start-hbase.sh && sleep 30 && $HBASE_PREFIX/bin/stop-hbase.sh && sleep 30
+# only run from machine 03
+[ $HOSTNAME == "CSE-Hcse101423D" ] && $HBASE_PREFIX/bin/start-hbase.sh 
+# sleep 30 
+# [ $HOSTNAME == "CSE-Hcse101423D" ] && $HBASE_PREFIX/bin/stop-hbase.sh 
+# sleep 30
+# [ $HOSTNAME == "CSE-Hcse101423D" ] && $HBASE_PREFIX/bin/start-hbase.sh 
 
 cd $YCSB_PREFIX
-chmod +x $YCSB_PREFIX/run_YCSB.sh
-$YCSB_PREFIX/run_YCSB.sh
-
+# [ $HOSTNAME == "CSE-Hcse101423D" ] && $YCSB_PREFIX/run_YCSB.sh 
 
 # Keep container Running while run in background
 if [[ $1 == "-d" ]]; then

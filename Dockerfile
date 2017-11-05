@@ -12,7 +12,7 @@ USER root
 # install dev tools
 RUN yum clean all; \
     rpm --rebuilddb; \
-    yum install -y curl which tar sudo openssh-server openssh-clients rsync nc wget git telnet
+    yum install -y curl which tar sudo openssh-server openssh-clients rsync nc wget git telnet python-argparse
 # update libselinux. see https://github.com/sequenceiq/hadoop-docker/issues/14
 RUN yum update -y libselinux
 
@@ -128,6 +128,7 @@ ENV YCSB_PREFIX /usr/local/YCSB
 RUN cd $YCSB_PREFIX && mvn clean package
 ADD workloadmy $YCSB_PREFIX/workloads/workloadmy
 ADD run_YCSB.sh $YCSB_PREFIX/run_YCSB.sh
+RUN chmod +x $YCSB_PREFIX/run_YCSB.sh
 
 # Add Bootstrap Script
 ADD bootstrap.sh /etc/bootstrap.sh
