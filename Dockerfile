@@ -88,12 +88,6 @@ ADD regionservers  $HBASE_PREFIX/conf/regionservers
 #
 # ADD supervisord.conf /etc/supervisord.conf
 
-#### TODO Add bootstrap script to change something when container starts
-ADD bootstrap.sh /etc/bootstrap.sh
-RUN chown root:root /etc/bootstrap.sh
-RUN chmod 700 /etc/bootstrap.sh
-#### TODO Add it back 
-ENV BOOTSTRAP /etc/bootstrap.sh
 ###
 # workingaround docker.io build error
 # RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
@@ -117,6 +111,29 @@ RUN echo "Port 21222" >> /etc/ssh/sshd_config
 
 ADD hadoop-common-2.5.1.jar $HBASE_PREFIX/lib/hadoop-common-2.5.1.jar.new
 
+
+
+# Maven
+# maven.sh script is loaded during bootstrap
+RUN curl -s http://ftp.wayne.edu/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz | tar -xz -C /usr/local/
+RUN cd /usr/local && ln -s apache-maven-3.5.2  maven
+# ADD maven.sh /etc/profile.d/maven.sh
+ENV M2_HOME /usr/local/maven
+ENV M2 $M2_HOME/bin
+ENV PATH $M2:$PATH
+
+# YCSB from github repo
+RUN git clone https://github.com/brianfrankcooper/YCSB.git /usr/local/YCSB
+ENV YCSB_PREFIX /usr/local/YCSB
+RUN cd $YCSB_PREFIX && mvn clean package
+ADD workloadmy $YCSB_PREFIX/workloads/workloadmy
+ADD run_YCSB.sh $YCSB_PREFIX/run_YCSB.sh
+
+# Add Bootstrap Script
+ADD bootstrap.sh /etc/bootstrap.sh
+RUN chown root:root /etc/bootstrap.sh
+RUN chmod 700 /etc/bootstrap.sh
+ENV BOOTSTRAP /etc/bootstrap.sh
 
 RUN service sshd start 
 

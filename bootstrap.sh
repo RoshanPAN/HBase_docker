@@ -26,8 +26,14 @@ rm /tmp/*.pid
 # cd $HADOOP_PREFIX/share/hadoop/common ; for cp in ${ACP//,/ }; do  echo == $cp; curl -LO $cp ; done; cd -
 
 service sshd start
+
 # Start HBase
-# $HBASE_PREFIX/bin/start-hbase.sh
+$HBASE_PREFIX/bin/start-hbase.sh && sleep 30 && $HBASE_PREFIX/bin/stop-hbase.sh && sleep 30
+
+cd $YCSB_PREFIX
+chmod +x $YCSB_PREFIX/run_YCSB.sh
+$YCSB_PREFIX/run_YCSB.sh
+
 
 # Keep container Running while run in background
 if [[ $1 == "-d" ]]; then
