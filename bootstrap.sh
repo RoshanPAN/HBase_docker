@@ -30,13 +30,13 @@ service sshd start
 # Start HBase
 # only run from machine 03
 [ $HOSTNAME == "CSE-Hcse101423D" ] && $HBASE_PREFIX/bin/start-hbase.sh 
-# sleep 30 
-# [ $HOSTNAME == "CSE-Hcse101423D" ] && $HBASE_PREFIX/bin/stop-hbase.sh 
-# sleep 30
-# [ $HOSTNAME == "CSE-Hcse101423D" ] && $HBASE_PREFIX/bin/start-hbase.sh 
+echo "wait for hbase to start" && sleep 6
 
-cd $YCSB_PREFIX
-# [ $HOSTNAME == "CSE-Hcse101423D" ] && $YCSB_PREFIX/run_YCSB.sh 
+echo "All setting up completed, need insert test table manully in ./hbase shell"
+echo "hbase(main):001:0> n_splits = 200 # HBase recommends (10 * number of regionservers)"
+echo "create 'usertable', 'family', {SPLITS => (1..n_splits).map {|i| "user#{1000+i*(9999-1000)/n_splits}"}}"
+
+# [ $HOSTNAME == "CSE-Hcse101423D" ] && cd $YCSB_PREFIX && $YCSB_PREFIX/run_YCSB.sh 
 
 # Keep container Running while run in background
 if [[ $1 == "-d" ]]; then

@@ -21,7 +21,7 @@
   </property>
   <property>
     <name>hbase.zookeeper.property.dataDir</name>
-    <value>/usr/local/zookeeper</value>
+    <value>hdfs://machine01:8020/zookeeper</value>
   </property>
   <property>
       <name>hbase.zookeeper.property.clientPort</name>

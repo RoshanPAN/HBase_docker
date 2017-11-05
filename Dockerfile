@@ -125,7 +125,7 @@ ENV PATH $M2:$PATH
 # YCSB from github repo
 RUN git clone https://github.com/brianfrankcooper/YCSB.git /usr/local/YCSB
 ENV YCSB_PREFIX /usr/local/YCSB
-RUN cd $YCSB_PREFIX && mvn clean package
+RUN cd $YCSB_PREFIX && mvn -pl com.yahoo.ycsb:hbase12-binding -am clean package
 ADD workloadmy $YCSB_PREFIX/workloads/workloadmy
 ADD run_YCSB.sh $YCSB_PREFIX/run_YCSB.sh
 RUN chmod +x $YCSB_PREFIX/run_YCSB.sh

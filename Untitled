@@ -1,0 +1,17 @@
+2017-11-05 17:02:10,946 ERROR [Thread-2] client.AsyncProcess: Failed to get region location
+org.apache.hadoop.hbase.client.NoServerForRegionException: No server address listed in hbase:meta for region usertable,user3204,1509918597291.b96975581c06e46cab5db04a01e2c6b8. containing row user3232700585171816769
+	at org.apache.hadoop.hbase.client.ConnectionManager$HConnectionImplementation.locateRegionInMeta(ConnectionManager.java:1318)
+	at org.apache.hadoop.hbase.client.ConnectionManager$HConnectionImplementation.locateRegion(ConnectionManager.java:1181)
+	at org.apache.hadoop.hbase.client.AsyncProcess.submit(AsyncProcess.java:410)
+	at org.apache.hadoop.hbase.client.AsyncProcess.submit(AsyncProcess.java:359)
+	at org.apache.hadoop.hbase.client.BufferedMutatorImpl.backgroundFlushCommits(BufferedMutatorImpl.java:238)
+	at org.apache.hadoop.hbase.client.BufferedMutatorImpl.flush(BufferedMutatorImpl.java:190)
+	at org.apache.hadoop.hbase.client.HTable.flushCommits(HTable.java:1434)
+	at org.apache.hadoop.hbase.client.HTable.put(HTable.java:1018)
+	at com.yahoo.ycsb.db.HBaseClient10.update(HBaseClient10.java:444)
+	at com.yahoo.ycsb.db.HBaseClient10.insert(HBaseClient10.java:475)
+	at com.yahoo.ycsb.DBWrapper.insert(DBWrapper.java:221)
+	at com.yahoo.ycsb.workloads.CoreWorkload.doInsert(CoreWorkload.java:562)
+	at com.yahoo.ycsb.ClientThread.run(Client.java:467)
+	at java.lang.Thread.run(Thread.java:748)
+  
