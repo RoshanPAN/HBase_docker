@@ -28,13 +28,15 @@ rm /tmp/*.pid
 service sshd start
 
 # Start HBase
-# only run from machine 03
-[ $HOSTNAME == "CSE-Hcse101423D" ] && $HBASE_PREFIX/bin/start-hbase.sh 
-echo "wait for hbase to start"
-echo "All setting up completed, need insert test table manully in ./hbase shell"
-echo "hbase(main):001:0> n_splits = 200 # HBase recommends (10 * number of regionservers)"
-echo "create 'usertable', 'family', {SPLITS => (1..n_splits).map {|i| "user#{1000+i*(9999-1000)/n_splits}"}}"
-sleep 6
+# only run from machine 0j3
+# [ $HOSTNAME == "CSE-Hcse101423D" ] && $HBASE_PREFIX/bin/start-hbase.sh 
+# echo "wait for hbase to start"
+# echo "All setting up completed, need insert test table manully in ./hbase shell"
+# echo "hbase(main):001:0> n_splits = 200 # HBase recommends (10 * number of regionservers)"
+# echo "create 'usertable', 'family', {SPLITS => (1..n_splits).map {|i| \"user#{1000+i*(9999-1000)/n_splits}\"}}"
+# sleep 6
+echo "[Attention] If exception happened in RegionServer, then remove the WAL logs in hdfs."
+echo "bin/hdfs dfs -rmr /hbase/WALs"
 
 # [ $HOSTNAME == "CSE-Hcse101423D" ] && cd $YCSB_PREFIX && $YCSB_PREFIX/run_YCSB.sh 
 
