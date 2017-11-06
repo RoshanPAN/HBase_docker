@@ -8,9 +8,6 @@ This is an docker image/Dockerfile for running a 3 machine **Hbase** cluster.
 - `$YCSB_PREFIX`: path to YCSB
 - `$EXPERIMENT`: path to the scripts of modify YCSB to record throughput and other scripts
 
-# Host machine configuration
-
-
 # Steps to use the container in the experiement
 ###### Host Machine Configuration
 1. Modify the `/etc/hosts` file on host machine to be like this:
@@ -31,7 +28,12 @@ This is an docker image/Dockerfile for running a 3 machine **Hbase** cluster.
   > Container seems to use the host machine's `/etc/hosts` file.
 2. Have the 3 machines using the same SSH public and private key.
   > Dockerfile will copy their host machine's public & private key into the container, so that the container could have no password SSH login with each other.
+
+
 ###### Use the Container
+0. Create the volume to be mounted into container
+  `docker volume create pci_experiment`
+  ``
 1. **Format the HDFS** 
   > There is a script in HDFS container to do this. `$HADOOP_PREFIX/restart-hdfs.sh`)
 

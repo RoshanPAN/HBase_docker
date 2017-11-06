@@ -9,4 +9,6 @@ read -p "Have you format and restart hdfs? (y/n): " isformat
   -p 16200:16200 -p 16300:16300 \
   -p 2888:2888 -p 3888:3888 -p 2181:2181 \
   -p 21222:21222 \
+  --mount source=pci_experiment,target=/usr/local/pci_experiment_volume \
+  --name hbase_distributed \
   pls331/centos:hbase-1.2.6-dist /etc/bootstrap.sh -bash
