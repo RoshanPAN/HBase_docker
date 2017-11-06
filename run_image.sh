@@ -1,4 +1,7 @@
-docker run -it --net=host \
+#!/bin/bash
+
+read -p "Have you format and restart hdfs? (y/n): " isformat
+[ $isformat == "y" ] && docker run -it --net=host \
   -p 60000:60000 -p 60010:60010 -p 60020:60020 -p 60030:60030 \
   -p 16000:16000 -p 16010:16010 -p 16020:16020 -p 16030:16030 \
   -p 16012:16012 -p 16022:16022 -p 16032:16032 \
