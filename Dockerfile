@@ -138,6 +138,9 @@ ENV BOOTSTRAP /etc/bootstrap.sh
 
 RUN service sshd start 
 
+RUN cd /usr/local && git clone https://github.com/RoshanPAN/pci_experiment.git
+ENV EXPERIMENT /usr/local/pci_experiment
+
 WORKDIR /usr/local/hbase
 
 # HDFS Default Ports
