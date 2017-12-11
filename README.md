@@ -58,7 +58,7 @@ This is an docker image/Dockerfile for running a 3 machine **Hbase** cluster.
 5. **Run YCSB with** `workloady`
     - Replace 2 source file in YCSB with the ones we modified and put the workloady into `$YCSB_PREFIX/workloads` folder
       `cd $EXPERIMENT`
-      `./modifyYCSB.sh`
+      `./modifyYCSB_new.sh`
     - Load YCSB data into HBase
       `./loadYCSB.sh`
     - Start YCSB
